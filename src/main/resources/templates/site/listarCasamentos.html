@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listando casamentos</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{base/menu :: menu}"></div>
+	<div class="container">
+		<h1>Lista de casamentos</h1>
+		<table>
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Noivo</th>
+				<th>Noiva</th>
+				<th>Local</th>
+				<th>Data</th>
+				<th>Horário</th>
+				<th>Capacidade</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="c : ${casamentos}">
+				<td><span th:text="${c.id}"></span></td>
+				<td><span th:text="${c.noivo}"></span></td>
+				<td><span th:text="${c.noiva}"></span></td>
+				<td><span th:text="${c.local}"></span></td>
+				<td><span th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></span></td>
+				<td><span th:text="${c.horario}"></span></td>
+				<td><span th:text="${c.capacidade}"></span></td>
+				<td>
+				<a th:href="@{/site/{id}(id=${c.id})}"><i class="material-icons">description</i></a>
+				
+				<i class="material-icons">edit</i>
+				
+				<a th:href="@{/site/{id}/remover(id=${c.id})}"><i class="material-icons">delete</i></a>
+				
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>

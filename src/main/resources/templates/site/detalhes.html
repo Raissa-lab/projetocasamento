@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Detalhes do casamento</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{base/menu :: menu}"></div>
+	<div class="container">
+		<h1>Detalhes do casamento</h1>
+
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Casamento</span>
+						<p>
+							<strong>Id: </strong><span th:text="${casamento.id}"></span>
+						</p>
+						<p>
+							<strong>Noivo: </strong><span th:text="${casamento.noivo}"></span>
+						</p>
+						<p>
+							<strong>Noiva: </strong><span th:text="${casamento.noiva}"></span>
+						</p>
+						<p>
+							<strong>Local: </strong><span th:text="${casamento.local}"></span>
+						</p>
+						<p>
+							<strong>Data: </strong><span th:text="${casamento.data}"></span>
+						</p>
+						<p>
+							<strong>Horário: </strong><span th:text="${casamento.horario}"></span>
+						</p>
+						<p>
+							<strong>Capacidade: </strong><span th:text="${casamento.capacidade}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

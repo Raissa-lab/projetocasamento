@@ -1,5 +1,9 @@
 package ifrn.projeto.casamento.repositories;
 
-public interface CasamentoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import ifrn.projeto.casamento.models.Casamento;
+
+public interface CasamentoRepository extends JpaRepository<Casamento, Long>{
 
 }

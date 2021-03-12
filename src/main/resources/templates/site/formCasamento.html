@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastrando casamento</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{base/menu :: menu}"></div>
+	<div class="container">
+		<h1>Cadastrar casamento</h1>
+		<form action="/site/listarCasamentos" method="post" th:object="${casamento}">
+			<div>
+				<input type="hidden" th:field="*{id}" readonly="readonly">
+			</div>
+			<div>
+				<label>Noivo:</label> <input type="text" th:field="*{noivo}">
+				<p th:errors="*{noivo}"></p>
+			</div>
+			<div>
+				<label>Noiva:</label> <input type="text" th:field="*{noiva}">
+				<p th:errors="*{noiva}"></p>
+			</div>
+			<div>
+				<label>Local:</label> <input type="text" th:field="*{local}">
+				<p th:errors="*{local}"></p>
+			</div>
+			<div>
+				<label>Data:</label> <input type="date" th:field="*{data}">
+				<p th:errors="*{data}"></p>
+			</div>
+			<div>
+				<label>Horário:</label> <input type="time" th:field="*{horario}">
+				<p th:errors="*{horario}"></p>
+			</div>
+			<div>
+				<label>Capacidade:</label> <input type="number" th:field="*{capacidade}">
+				<p th:errors="*{capacidade}"></p>
+			</div>
+			
+			
+			
+			<div>
+				<button class="waves-effect waves-light btn" type="submit">Cadastrar</button>
+				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
