@@ -16,18 +16,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.projeto.casamento.models.Casamento;
-import ifrn.projeto.casamento.models.Empresa;
+import ifrn.projeto.casamento.models.Proposta;
 import ifrn.projeto.casamento.repositories.CasamentoRepository;
-import ifrn.projeto.casamento.repositories.EmpresaRepository;
+import ifrn.projeto.casamento.repositories.PropostaRepository;
 
 @Controller
 @RequestMapping("/site")
 public class CasamentoController {
 	@Autowired
 	private CasamentoRepository cr;
-	
 	@Autowired
-	private EmpresaRepository er;
+	private PropostaRepository pr;
+
+	
 
 	@GetMapping("/formCasamento")
 	public String formCasamento(Casamento casamento) {
@@ -56,6 +57,7 @@ public class CasamentoController {
 	public ModelAndView detalhar(@PathVariable Long id) {
 		ModelAndView mv = new ModelAndView();
 		Optional<Casamento> opt = cr.findById(id);
+		Optional<Proposta> opt1 = pr.findById(id);
 		
 		if(opt.isEmpty()) {
 			mv.setViewName("redirect:/site/listarCasamentos");
@@ -63,7 +65,10 @@ public class CasamentoController {
 		}
 		mv.setViewName("site/detalhes");
 		Casamento casamento = opt.get();
+		Proposta proposta = opt1.get();
+		
 		mv.addObject("casamento", casamento);
+		mv.addObject("proposta", proposta);
 		
 		return mv;
 	}
@@ -79,5 +84,17 @@ public class CasamentoController {
 		}
 		return "redirect:/site/listarCasamentos";
 	}
+	
+	@PostMapping("/{idCasamento}")
+	public String salvarProposta(@PathVariable Long idCasamento, Proposta proposta) {
+		Optional <Casamento> opt = cr.findById(idCasamento);
+		if(opt.isEmpty()) {
+			return "redirect:/site/listarCasamentos";
+		}
+		
+		pr.save(proposta);
+		return "redirect:/site/{idCasamento}";
+	}
+	
 	
 }

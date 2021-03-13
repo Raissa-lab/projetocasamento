@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.LazyCollection;
@@ -37,9 +37,13 @@ public class Casamento {
 	@NotBlank
 	private String capacidade;
 
+	@Lob
+	@NotBlank
+	private String descricao;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Empresa> propostas;
+	private List<Proposta> propostas;
 
 	public Long getId() {
 		return id;
@@ -97,15 +101,22 @@ public class Casamento {
 		this.capacidade = capacidade;
 	}
 
-	public List<Empresa> getPropostas() {
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public List<Proposta> getPropostas() {
 		return propostas;
 	}
 
-	public void setPropostas(List<Empresa> propostas) {
+	public void setPropostas(List<Proposta> propostas) {
 		this.propostas = propostas;
 	}
 
-	
 	
 
 }

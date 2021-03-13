@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastrando empresa</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{base/menu :: menu}"></div>
+	<div class="container">
+		<h1>Cadastrar empresa</h1>
+		<form action="/site/index" method="post">
+			<div>
+				<input type="hidden" name="id" readonly="readonly">
+			</div>
+			<div>
+				<label>Nome:</label> <input type="text" name="nome">
+				
+			</div>
+			<div>
+				<label>CNPJ:</label> <input type="text" name="cnpj">
+			</div>
+			<div>
+				<label>Email:</label> <input type="text" name="email">
+			</div>
+	
+			<div>
+				<button class="waves-effect waves-light btn" type="submit">Cadastrar</button>
+				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
