@@ -13,19 +13,22 @@
 	<div th:replace="~{base/menu :: menu}"></div>
 	<div class="container">
 		<h1>Cadastrar empresa</h1>
-		<form action="/site/index" method="post">
+		
+		<form action="/site/listarEmpresas" method="post" th:object="${empresa}">
 			<div>
-				<input type="hidden" name="id" readonly="readonly">
+				<input type="hidden" th:field="*{id}" readonly="readonly">
 			</div>
 			<div>
-				<label>Nome:</label> <input type="text" name="nome">
-				
+				<label>Nome:</label> <input type="text" th:field="*{nome}">
+				<p th:errors="*{nome}"></p>
 			</div>
 			<div>
-				<label>CNPJ:</label> <input type="text" name="cnpj">
+				<label>CNPJ:</label> <input type="text" th:field="*{cnpj}">
+				<p th:errors="*{cnpj}"></p>
 			</div>
 			<div>
-				<label>Email:</label> <input type="text" name="email">
+				<label>Email de contato:</label> <input type="text" th:field="*{email}">
+				<p th:errors="*{email}"></p>
 			</div>
 	
 			<div>

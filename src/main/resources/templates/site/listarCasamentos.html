@@ -13,41 +13,39 @@
 	<div th:replace="~{base/menu :: menu}"></div>
 	<div class="container">
 		<h1>Lista de casamentos</h1>
-		<table>
 		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<table>
+			
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Noivo</th>
+					<th>Noiva</th>
+					<th>Local</th>
+					<th>Data</th>
+					<th>Horário</th>
+					<th>Capacidade</th>
+					<th></th>
+				</tr>
+			</thead>
 
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Noivo</th>
-				<th>Noiva</th>
-				<th>Local</th>
-				<th>Data</th>
-				<th>Horário</th>
-				<th>Capacidade</th>
-				<th></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr th:each="c : ${casamentos}">
-				<td><span th:text="${c.id}"></span></td>
-				<td><span th:text="${c.noivo}"></span></td>
-				<td><span th:text="${c.noiva}"></span></td>
-				<td><span th:text="${c.local}"></span></td>
-				<td><span th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></span></td>
-				<td><span th:text="${c.horario}"></span></td>
-				<td><span th:text="${c.capacidade}"></span></td>
-				<td>
-				<a th:href="@{/site/{id}(id=${c.id})}"><i class="material-icons">description</i></a>
-				
-				<i class="material-icons">edit</i>
-				
-				<a th:href="@{/site/{id}/remover(id=${c.id})}"><i class="material-icons">delete</i></a>
-				
-				</td>
-			</tr>
-		</tbody>
+			<tbody>
+				<tr th:each="c : ${casamentos}">
+					<td><span th:text="${c.id}"></span></td>
+					<td><span th:text="${c.noivo}"></span></td>
+					<td><span th:text="${c.noiva}"></span></td>
+					<td><span th:text="${c.local}"></span></td>
+					<td><span th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></span></td>
+					<td><span th:text="${c.horario}"></span></td>
+					<td><span th:text="${c.capacidade}"></span></td>
+					<td><a th:href="@{/site/{id}(id=${c.id})}"><i
+							class="material-icons">description</i></a> <a
+						th:href="@{/site/{id}/selecionar(id=${c.id})}"><i
+							class="material-icons">edit</i></a> <a
+						th:href="@{/site/{id}/remover(id=${c.id})}"><i
+							class="material-icons">delete</i></a></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </body>

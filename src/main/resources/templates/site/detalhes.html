@@ -47,35 +47,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col s12">
-				<div class="card">
-					<div class="card-content">
-						<span class="card-title">Fazer proposta</span>
-						<form
-							th:action="@{/site/{idCasamento}(idCasamento=${casamento.id})}"
-							method="post">
-							<div>
-								<input type="hidden" name="id" readonly="readonly">
-							</div>
-							<div>
-								<label>Descrição: </label><input type="text" name="descricao">
-							</div>
-
-							<div>
-								<button type="submit" class="btn">Propor</button>
-								<button type="reset" class="btn">Limpar</button>
-							</div>
-						</form>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-		
-
 	</div>
 </body>
 </html>

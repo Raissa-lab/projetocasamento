@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listando empresas</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{base/menu :: menu}"></div>
+	<div class="container">
+		<h1>Lista de empresas</h1>
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<table>
+			
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>CNPJ</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="e : ${empresas}">
+					<td><span th:text="${e.id}"></span></td>
+					<td><span th:text="${e.nome}"></span></td>
+					<td><span th:text="${e.cnpj}"></span></td>
+					<td><span th:text="${e.email}"></span></td>
+					
+					<td><a th:href="@{/site/detalhar/{id}(id=${e.id})}"><i
+							class="material-icons">description</i></a> <a
+						th:href="@{/site/{id}/selecionarEmpresa(id=${e.id})}"><i
+							class="material-icons">edit</i></a> <a
+						th:href="@{/site/{id}/removerEmpresa(id=${e.id})}"><i
+							class="material-icons">delete</i></a></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
