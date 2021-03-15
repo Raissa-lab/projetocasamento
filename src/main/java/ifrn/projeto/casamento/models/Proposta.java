@@ -23,5 +23,39 @@ public class Proposta {
 	
 	@ManyToOne
 	Casamento casamento;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Casamento getCasamento() {
+		return casamento;
+	}
+
+	public void setCasamento(Casamento casamento) {
+		this.casamento = casamento;
+	}
+	
+	
 	
 }

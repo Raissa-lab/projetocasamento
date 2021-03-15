@@ -47,6 +47,65 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Fazer proposta</span>
+						<form
+							th:action="@{/site/{idCasamento}(idCasamento=${casamento.id})}"
+							method="post" th:object="${proposta}">
+							<div>
+								<input type="hidden" th:field="*{id}" readonly="readonly">
+							</div>
+							<div>
+								<label>Descrição: </label><input type="text"
+									th:field="*{descricao}">
+								<p th:errors="*{descricao}"></p>
+							</div>
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+
+							<div>
+								<button type="submit" class="btn">Salvar</button>
+								<button type="reset" class="btn">Limpar</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Propostas</span>
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Descrição</th>
+									<th>Id empresa</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="p : ${propostas}">
+									<td th:text="${p.id}"></td>
+									<td th:text="${p.descricao}"></td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>

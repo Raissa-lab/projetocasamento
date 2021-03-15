@@ -16,13 +16,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.projeto.casamento.models.Casamento;
+import ifrn.projeto.casamento.models.Empresa;
+import ifrn.projeto.casamento.models.Proposta;
 import ifrn.projeto.casamento.repositories.CasamentoRepository;
+import ifrn.projeto.casamento.repositories.EmpresaRepository;
+import ifrn.projeto.casamento.repositories.PropostaRepository;
 
 @Controller
 @RequestMapping("/site")
 public class CasamentoController {
 	@Autowired
 	private CasamentoRepository cr;
+	
+	@Autowired
+	private PropostaRepository pr;
+	
+	@Autowired
+	private EmpresaRepository er;
 
 	@GetMapping("/formCasamento")
 	public String formCasamento(Casamento casamento) {
@@ -48,7 +58,7 @@ public class CasamentoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id, Proposta proposta) {
 		ModelAndView mv = new ModelAndView();
 		Optional<Casamento> opt = cr.findById(id);
 		
@@ -96,16 +106,31 @@ public class CasamentoController {
 		return "redirect:/site/listarCasamentos";
 	}
 	
-	/*@PostMapping("/{idCasamento}")
-	public String salvarProposta(@PathVariable Long idCasamento, Proposta proposta) {
-		Optional <Casamento> opt = cr.findById(idCasamento);
+	@PostMapping("/{idCasamento}")
+	public ModelAndView salvarProposta(@PathVariable Long idCasamento, @Valid Proposta proposta, BindingResult result, RedirectAttributes atributos) {
+		ModelAndView mv = new ModelAndView();
+		Optional<Casamento> opt = cr.findById(idCasamento);
+		
 		if(opt.isEmpty()) {
-			return "redirect:/site/listarCasamentos";
+			mv.setViewName("redirect:/site/listarCasamentos");
 		}
 		
+		if(result.hasErrors()) {
+			return detalhar(idCasamento, proposta);
+		}
+		
+		Casamento casamento = opt.get();
+		proposta.setCasamento(casamento);
+		
 		pr.save(proposta);
-		return "redirect:/site/{idCasamento}";
-	}*/
+		
+		atributos.addFlashAttribute("mensagem", "Proposta feita com sucesso!");
+
+		mv.setViewName("redirect:/site/{idCasamento}");
+		
+		return mv;
+		
+	}
 	
 	
 }
