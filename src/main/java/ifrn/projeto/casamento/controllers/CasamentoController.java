@@ -29,14 +29,14 @@ public class CasamentoController {
 		return "/site/formCasamento";
 	}
 
-	@PostMapping("listarCasamentos")
+	@PostMapping("formCasamento")
 	public String salvar(@Valid Casamento casamento, BindingResult result, RedirectAttributes atributos) {
 		if(result.hasErrors()) {
 			return formCasamento(casamento);
 		}
 		cr.save(casamento);
 		atributos.addFlashAttribute("mensagem", "casamento cadastrado com sucesso!");
-		return "redirect:/site/listarCasamentos";
+		return "redirect:/site/formCasamento";
 	}
 	
 	@GetMapping("/listarCasamentos")

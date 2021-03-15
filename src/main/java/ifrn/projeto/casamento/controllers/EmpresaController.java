@@ -31,14 +31,14 @@ public class EmpresaController {
 		return "/site/formEmpresa";
 	}
 	
-	@PostMapping("listarEmpresas")
+	@PostMapping("formEmpresa")
 	public String salvarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes atributos) {
 		if(result.hasErrors()) {
 			return formEmpresa(empresa);
 		}
 		er.save(empresa);
 		atributos.addFlashAttribute("mensagem", "empresa cadastrada com sucesso!");
-		return "redirect:/site/listarEmpresas";
+		return "redirect:/site/formEmpresa";
 	}
 	
 	@GetMapping("/listarEmpresas")

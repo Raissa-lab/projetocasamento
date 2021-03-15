@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeLeaf.org">
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Casamentos</title>
@@ -10,10 +12,11 @@
 			<a href="/" class="brand-logo">Sistema de casamentos</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="/">Home</a></li>
-				<li><a href="site/formCasamento">Cadastrar casamento</a></li>
-				<li><a href="/site/listarCasamentos">Listar casamentos</a></li>
-				<li><a href="/site/formEmpresa" >Cadastrar empresa</a></li>
-				<li><a href="/site/listarEmpresas" >Listar empresa</a></li>
+				<li sec:authorize="hasRole('CADASTRADO')"><a href="site/formCasamento">Cadastrar casamento</a></li>
+				<li sec:authorize="hasRole('EMPRESA')"><a href="/site/listarCasamentos">Listar casamentos</a></li>
+				<li sec:authorize="hasRole('EMPRESA')"><a href="/site/formEmpresa">Cadastrar empresa</a></li>
+				<li sec:authorize="hasRole('ADMINISTRADOR')"><a href="/site/listarEmpresas">Listar empresa</a></li>
+				<li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Login</a></li>
 			</ul>
 		</div>
 	</nav>

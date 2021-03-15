@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeLeaf.org">
+<html xmlns:th="http://www.thymeLeaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Listando casamentos</title>
@@ -13,7 +15,7 @@
 	<div th:replace="~{base/menu :: menu}"></div>
 	<div class="container">
 		<h1>Lista de casamentos</h1>
-		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		
 		<table>
 			
 			<thead>
@@ -38,10 +40,10 @@
 					<td><span th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></span></td>
 					<td><span th:text="${c.horario}"></span></td>
 					<td><span th:text="${c.capacidade}"></span></td>
-					<td><a th:href="@{/site/{id}(id=${c.id})}"><i
-							class="material-icons">description</i></a> <a
+					<td><a sec:authorize="hasRole('EMPRESA')" th:href="@{/site/{id}(id=${c.id})}"><i
+							class="material-icons">description</i></a> <a sec:authorize="hasRole('ADMINISTRADOR')"
 						th:href="@{/site/{id}/selecionar(id=${c.id})}"><i
-							class="material-icons">edit</i></a> <a
+							class="material-icons">edit</i></a> <a sec:authorize="hasRole('ADMINISTRADOR')"
 						th:href="@{/site/{id}/remover(id=${c.id})}"><i
 							class="material-icons">delete</i></a></td>
 				</tr>
