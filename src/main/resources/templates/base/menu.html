@@ -17,6 +17,14 @@
 				<li sec:authorize="hasRole('EMPRESA')"><a href="/site/formEmpresa">Cadastrar empresa</a></li>
 				<li sec:authorize="hasRole('ADMINISTRADOR')"><a href="/site/listarEmpresas">Listar empresa</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Login</a></li>
+				<li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/cadastro}">Cadastro</a></li>
+				<li sec:authorize="isAuthenticated()">
+					<form action="/logout" method="post">
+						<button class="waves-effect waves-light btn-tiny" type="submit">Sair</button>
+						<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" /> 
+					</form>
+				</li>
 			</ul>
 		</div>
 	</nav>
