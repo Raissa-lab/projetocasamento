@@ -20,7 +20,7 @@
 	<div class="container">
 
 		<h1>Faça seu login</h1>
-<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
 		<div th:if="${param.logout}" class="row">
 			<div class="col-4 center">
 				<p>Até logo!</p>
@@ -30,12 +30,14 @@
 			<form action="" method="post">
 				<div class="row">
 					<div class="col-4 center">
-						<label>E-mail</label> <input type="text" name="username">
+					<i class="material-icons">email</i>
+						<input type="text" placeholder="E-mail" name="username">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-4 center">
-						<label>Senha</label> <input type="password" name="password">
+					<i class="material-icons">lock_outline</i>
+						<input type="password" placeholder="Senha" name="password">
 					</div>
 				</div>
 
@@ -44,8 +46,9 @@
 
 				<div class="row">
 					<div class="col-4 center">
-						<button class="btn" type="submit">Enviar</button>
-						<button class="btn" type="reset">Limpar</button>
+						<button class="btn-small" type="submit">Enviar</button>
+						<button class="btn-small" type="reset">Limpar</button>
+						
 					</div>
 				</div>
 

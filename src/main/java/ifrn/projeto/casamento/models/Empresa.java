@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Empresa {
@@ -12,12 +11,11 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
+	
 	private String nome;
-	@NotBlank
+	
 	private String cnpj;
-	@NotBlank
-	private String email;
+	
 
 	public Long getId() {
 		return id;
@@ -43,12 +41,6 @@ public class Empresa {
 		this.cnpj = cnpj;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 
 }

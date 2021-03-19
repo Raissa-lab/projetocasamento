@@ -9,12 +9,12 @@
 <body>
 	<nav class="navbar purple" th:fragment="menu">
 		<div class="nav-wrapper container">
-			<a href="/" class="brand-logo">Sistema de casamentos</a>
+			<a href="/" class="brand-logo">Wedding Planning</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="/">Home</a></li>
+				
 				<li sec:authorize="hasRole('CADASTRADO')"><a href="site/formCasamento">Cadastrar casamento</a></li>
 				<li sec:authorize="hasRole('EMPRESA')"><a href="/site/listarCasamentos">Listar casamentos</a></li>
-				<li sec:authorize="hasRole('EMPRESA')"><a href="/site/formEmpresa">Cadastrar empresa</a></li>
+				<li sec:authorize="hasRole('ADMINISTRADOR')"><a href="/site/formEmpresa">Cadastrar empresa</a></li>
 				<li sec:authorize="hasRole('ADMINISTRADOR')"><a href="/site/listarEmpresas">Listar empresa</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Login</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/cadastro}">Cadastro</a></li>

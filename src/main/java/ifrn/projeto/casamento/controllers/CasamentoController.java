@@ -100,6 +100,9 @@ public class CasamentoController {
 		
 		if(!opt.isEmpty()) {
 			Casamento casamento = opt.get();
+			
+			List<Proposta> propostas = pr.findByCasamento(casamento);
+			pr.deleteAll(propostas);
 			cr.delete(casamento);
 			atributos.addFlashAttribute("mensagem", "casamento removido com sucesso!");
 		}

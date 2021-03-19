@@ -16,20 +16,23 @@
 		<p th:if="${mensagem}" th:text="${mensagem}"></p>
 		<form th:action="@{/cadastro}" method="post" th:object="${usuario}">
 			<div class="row">
-				<div class="col-12">
-					<label>Email</label><input type="text" th:field="*{email}">
+				<div class="col-4 center">
+					<i class="material-icons">email</i><input type="text" placeholder="E-mail" th:field="*{email}">
 					<p th:errors="*{email}"></p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12">
-					<label>Senha</label><input type="password" th:field="*{senha}">
+				<div class="col-4 center">
+					<i class="material-icons">lock_outline</i><input type="password" placeholder="Senha" th:field="*{senha}">
 					<p th:errors="*{senha}"></p>
 				</div>
 			</div>
 			<div class="row">
+			<div class="col-4 center">
 				<button class="waves-effect waves-light btn" type="submit">Cadastrar</button>
 				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
+				<a href="/site/formEmpresa" class="waves-effect waves-light btn-small">Empresa? Cadastre-se aqui.</a>
+				</div>
 			</div>
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />

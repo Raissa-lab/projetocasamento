@@ -14,22 +14,25 @@
 	<div class="container">
 		<h1>Cadastrar empresa</h1>
 		<p th:if="${mensagem}" th:text="${mensagem}"></p>
-		<form action="/site/formEmpresa" method="post" th:object="${empresa}">
+		<form action="/site/formEmpresa" method="post">
 			<div>
-				<input type="hidden" th:field="*{id}" readonly="readonly">
+				<input type="hidden" name="id" readonly="readonly">
 			</div>
 			<div>
-				<label>Nome:</label> <input type="text" th:field="*{nome}">
-				<p th:errors="*{nome}"></p>
+				<label>Nome:</label> <input type="text" name="nome">
+				
 			</div>
 			<div>
-				<label>CNPJ:</label> <input type="text" th:field="*{cnpj}">
-				<p th:errors="*{cnpj}"></p>
+				<label>CNPJ:</label> <input type="text" name="cnpj">
+				
 			</div>
 			<div>
-				<label>Email de contato:</label> <input type="text"
-					th:field="*{email}">
-				<p th:errors="*{email}"></p>
+				<label>Email de login:</label> <input type="text" name="email">
+
+			</div>
+			<div>
+				<label>Senha:</label> <input type="password" name="senha">
+
 			</div>
 
 			<input type="hidden" th:name="${_csrf.parameterName}"

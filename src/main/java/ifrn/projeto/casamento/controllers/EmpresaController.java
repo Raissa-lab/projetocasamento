@@ -1,11 +1,13 @@
 package ifrn.projeto.casamento.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.projeto.casamento.models.Casamento;
 import ifrn.projeto.casamento.models.Empresa;
+import ifrn.projeto.casamento.models.Papel;
+import ifrn.projeto.casamento.models.Usuario;
 import ifrn.projeto.casamento.repositories.EmpresaRepository;
+import ifrn.projeto.casamento.repositories.PapelRepository;
+import ifrn.projeto.casamento.repositories.PropostaRepository;
+import ifrn.projeto.casamento.repositories.UsuarioRepository;
 
 @Controller
 @RequestMapping("/site")
@@ -26,19 +33,34 @@ public class EmpresaController {
 	@Autowired
 	EmpresaRepository er;
 	
+	@Autowired
+	PapelRepository pr;
+	
+	@Autowired
+	UsuarioRepository ur;
+	
 	@GetMapping("/formEmpresa")
 	public String formEmpresa(Empresa empresa) {
 		return "/site/formEmpresa";
 	}
 	
 	@PostMapping("formEmpresa")
-	public String salvarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes atributos) {
+	public String salvarEmpresa(@Valid Empresa empresa, @Valid Usuario usuario, BindingResult result, RedirectAttributes atributos) {
 		if(result.hasErrors()) {
 			return formEmpresa(empresa);
 		}
+		ArrayList<Papel> papeis = new ArrayList<Papel>();
+		
+		Papel papel = pr.findByNome("ROLE_EMPRESA");
+		papeis.add(papel);
+		
+		usuario.setPapeis(papeis);
+		
+		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+		ur.save(usuario);
 		er.save(empresa);
 		atributos.addFlashAttribute("mensagem", "empresa cadastrada com sucesso!");
-		return "redirect:/site/formEmpresa";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/listarEmpresas")
@@ -68,7 +90,7 @@ public class EmpresaController {
 		return mv;
 	}
 	
-	@GetMapping("/{id}/selecionarEmpresa")
+	/*@GetMapping("/{id}/selecionarEmpresa")
 	public ModelAndView selecionarEmpresa(@PathVariable Long id) {
 		ModelAndView mv = new ModelAndView();
 		Optional<Empresa> opt = er.findById(id);
@@ -82,7 +104,7 @@ public class EmpresaController {
 		mv.addObject("empresa", empresa);
 
 		return mv;
-	}
+	}*/
 	
 	@GetMapping("/{id}/removerEmpresa")
 	public String removerEmpresa(@PathVariable Long id, RedirectAttributes atributos) {
